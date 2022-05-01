@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
@@ -30,6 +31,8 @@ public class LoginActivity extends AppCompatActivity {
         this.edtPassword = findViewById(R.id.login_edt_password);
         Button btnLogin = findViewById(R.id.login_btn_login);
         btnLogin.setOnClickListener(view -> login());
+        TextView txtNewAccount = findViewById(R.id.login_txt_new_account);
+        txtNewAccount.setOnClickListener(view -> createNewAccount());
     }
 
     private void login() {
@@ -45,6 +48,10 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
         startActivity(new Intent(this, DashboardActivity.class));
+    }
+
+    private void createNewAccount() {
+        startActivity(new Intent(this, CreateUserActivity.class));
     }
 
     private void hideKeyboard() {

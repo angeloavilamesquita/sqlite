@@ -7,4 +7,11 @@
     <string name="txt_credentials_wrong">Usuário e/ou Senha inválidos</string>
     <string name="txt_login_hint_user">Digite seu usuário</string>
     <string name="txt_login_hint_password">Digite sua senha</string>
+    <string name="txt_login_hint_confirm_password">Repita sua senha</string>
+    <string name="login_txt_new_user">Novo usuário</string>
+
+    <string name="txt_create_user_title">Usuários</string>
+    <string name="txt_create_user_subtitle">Tela de cadastro de novos usuários do aplicativo</string>
+    <string name="txt_create_user_btn_save">Salvar</string>
+    <string name="txt_create_user_password_not_the_same">As senhas devem ser idênticas</string>
 </resources>
