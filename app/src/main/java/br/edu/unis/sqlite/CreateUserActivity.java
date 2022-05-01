@@ -20,11 +20,11 @@ public class CreateUserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_user);
-        loadWigets();
+        loadWidgets();
         btnSaveOnClick();
     }
 
-    private void loadWigets() {
+    private void loadWidgets() {
         this.edtUser = findViewById(R.id.create_user_edt_user);
         this.edtPassword = findViewById(R.id.create_user_edt_password);
         this.edtConfirmPassword = findViewById(R.id.create_user_edt_confirm_password);
@@ -32,20 +32,30 @@ public class CreateUserActivity extends AppCompatActivity {
     }
 
     private void btnSaveOnClick() {
-        this.btnSave.setOnClickListener(view -> createNewUser());
+        this.btnSave.setOnClickListener(view -> {
+            boolean isUserCreated = createNewUser();
+            if (isUserCreated) {
+                Toast.makeText(this, R.string.txt_create_user_created_successful, Toast.LENGTH_SHORT).show();
+                return;
+            }
+            Toast.makeText(this, R.string.txt_create_user_not_created, Toast.LENGTH_SHORT).show();
+        });
     }
 
     private boolean createNewUser() {
         hideKeyboard();
-        if (!isFieldsEmpty()) {
+        if (isFieldsEmpty()) {
             Toast.makeText(this, R.string.txt_field_required, Toast.LENGTH_SHORT).show();
             this.edtUser.requestFocus();
+            return false;
         }
         if (!arePasswordTheSame()) {
             Toast.makeText(this, R.string.txt_create_user_password_not_the_same, Toast.LENGTH_SHORT).show();
             return false;
         }
-        return true;
+        SQLiteHelper db = SQLiteHelper.getInstance(this);
+        long id = db.createUser(edtUser.getText().toString(), edtPassword.getText().toString());
+        return id > 0;
     }
 
     private void hideKeyboard() {
