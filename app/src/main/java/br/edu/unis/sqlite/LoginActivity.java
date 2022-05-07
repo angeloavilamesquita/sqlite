@@ -23,6 +23,12 @@ public class LoginActivity extends AppCompatActivity {
         loadWidgets();
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        cleanFields();
+    }
+
     private void loadWidgets() {
         this.edtUser = findViewById(R.id.login_edt_user);
         this.edtUser.requestFocus();

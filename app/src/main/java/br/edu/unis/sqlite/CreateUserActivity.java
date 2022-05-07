@@ -65,13 +65,6 @@ public class CreateUserActivity extends AppCompatActivity {
         finish();
     }
 
-    public void cleanFields() {
-        edtUser.setText("");
-        edtPassword.setText("");
-        edtConfirmPassword.setText("");
-        edtUser.requestFocus();
-    }
-
     private void hideKeyboard() {
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(edtUser.getWindowToken(), 0);
