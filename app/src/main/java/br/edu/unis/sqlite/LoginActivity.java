@@ -15,8 +15,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText edtUser;
     private EditText edtPassword;
-    private static final String USER = "test";
-    private static final String PASSWORD = "test";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,11 +66,8 @@ public class LoginActivity extends AppCompatActivity {
     private boolean authenticate() {
         String user = this.edtUser.getText().toString();
         String password = this.edtPassword.getText().toString();
-        if (user.equals(LoginActivity.USER) && password.equals(LoginActivity.PASSWORD)) {
-            return true;
-        }
-        cleanFields();
-        return false;
+        SQLiteHelper db = SQLiteHelper.getInstance(this);
+        return db.authenticateUser(user, password);
     }
 
     private void cleanFields() {

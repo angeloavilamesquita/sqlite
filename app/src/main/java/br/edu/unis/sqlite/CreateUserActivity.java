@@ -3,6 +3,7 @@ package br.edu.unis.sqlite;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.database.SQLException;
 import android.os.Bundle;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -33,29 +34,42 @@ public class CreateUserActivity extends AppCompatActivity {
 
     private void btnSaveOnClick() {
         this.btnSave.setOnClickListener(view -> {
-            boolean isUserCreated = createNewUser();
-            if (isUserCreated) {
-                Toast.makeText(this, R.string.txt_create_user_created_successful, Toast.LENGTH_SHORT).show();
-                return;
+            try {
+                createNewUser();
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-            Toast.makeText(this, R.string.txt_create_user_not_created, Toast.LENGTH_SHORT).show();
         });
     }
 
-    private boolean createNewUser() {
+    private void createNewUser() {
         hideKeyboard();
         if (isFieldsEmpty()) {
             Toast.makeText(this, R.string.txt_field_required, Toast.LENGTH_SHORT).show();
             this.edtUser.requestFocus();
-            return false;
+            return;
         }
         if (!arePasswordTheSame()) {
             Toast.makeText(this, R.string.txt_create_user_password_not_the_same, Toast.LENGTH_SHORT).show();
-            return false;
+            return;
         }
-        SQLiteHelper db = SQLiteHelper.getInstance(this);
-        long id = db.createUser(edtUser.getText().toString(), edtPassword.getText().toString());
-        return id > 0;
+        new Thread(() -> {
+            SQLiteHelper db = SQLiteHelper.getInstance(this);
+            long id = db.createUser(edtUser.getText().toString(), edtPassword.getText().toString());
+            if (id > 0 ) {
+                runOnUiThread(() -> Toast.makeText(this, R.string.txt_create_user_created_successful, Toast.LENGTH_SHORT).show());
+            } else {
+                runOnUiThread(() ->Toast.makeText(this, R.string.txt_create_user_not_created, Toast.LENGTH_SHORT).show());
+            }
+        }).start();
+        finish();
+    }
+
+    public void cleanFields() {
+        edtUser.setText("");
+        edtPassword.setText("");
+        edtConfirmPassword.setText("");
+        edtUser.requestFocus();
     }
 
     private void hideKeyboard() {

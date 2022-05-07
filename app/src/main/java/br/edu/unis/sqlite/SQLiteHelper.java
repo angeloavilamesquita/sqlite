@@ -2,6 +2,7 @@ package br.edu.unis.sqlite;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -44,12 +45,33 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             values.put("password", password);
             id = db.insertOrThrow(DB_TABLE, null, values);
             db.setTransactionSuccessful();
+            Log.i("USER_CREATED","ID: " + id);
         } catch (SQLException e) {
             Log.e("ERROR_NEW_USER", "createUser: " + e.getMessage(), e);
         } finally {
             if (db.isOpen()) db.endTransaction();
         }
         return id;
+    }
+
+    public boolean authenticateUser(String user, String password) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] columns = { "user" };
+        String where = "user=? AND password=?";
+        String[] args = { user, password };
+        int count = 0;
+        try {
+            db.beginTransaction();
+            Cursor cursor = db.query(DB_TABLE, columns, where, args,null,null,null);
+            count = cursor.getCount();
+            cursor.close();
+            db.setTransactionSuccessful();
+        } catch (SQLException e) {
+            Log.e("ERROR_AUTHENTICATE", "authenticate user: " + e.getMessage(), e);
+        } finally {
+            if (db.isOpen()) db.endTransaction();
+        }
+        return count > 0;
     }
 
     @Override
