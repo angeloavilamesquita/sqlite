@@ -52,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
         startActivity(new Intent(this, DashboardActivity.class));
+        finish();
     }
 
     private void createNewAccount() {

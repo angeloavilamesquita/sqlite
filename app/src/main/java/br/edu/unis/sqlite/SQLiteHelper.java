@@ -10,6 +10,9 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SQLiteHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "unis.db";
     private static final int DB_VERSION = 1;
@@ -61,17 +64,39 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         String[] args = { user, password };
         int count = 0;
         try {
-            db.beginTransaction();
             Cursor cursor = db.query(DB_TABLE, columns, where, args,null,null,null);
             count = cursor.getCount();
             cursor.close();
-            db.setTransactionSuccessful();
         } catch (SQLException e) {
             Log.e("ERROR_AUTHENTICATE", "authenticate user: " + e.getMessage(), e);
         } finally {
-            if (db.isOpen()) db.endTransaction();
+            if (db.isOpen()) db.close();
         }
         return count > 0;
+    }
+
+    public List<User> all() {
+        final int ID = 0;
+        final int USER = 1;
+        final int PASSWORD = 2;
+        List<User> users = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        try {
+            Cursor cursor = db.rawQuery("SELECT * FROM users",null);
+            cursor.moveToFirst();
+            do {
+                long id = cursor.getLong(ID);
+                String user = cursor.getString(USER);
+                String password = cursor.getString(PASSWORD);
+                users.add(new User(id, user, password));
+            } while(cursor.moveToNext());
+            cursor.close();
+        } catch (SQLException e) {
+            Log.e("ERROR_LIST_USER", e.getMessage(), e);
+        } finally {
+            if (db.isOpen()) db.close();
+        }
+        return users;
     }
 
     @Override

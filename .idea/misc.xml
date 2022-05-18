@@ -5,7 +5,11 @@
       <map>
         <entry key="..\:/Users/Angelo/AndroidStudioProjects/SQLite/app/src/main/res/layout/activity_create_user.xml" value="0.5828220858895705" />
         <entry key="..\:/Users/Angelo/AndroidStudioProjects/SQLite/app/src/main/res/layout/activity_dashboard.xml" value="0.3536458333333333" />
+        <entry key="..\:/Users/Angelo/AndroidStudioProjects/SQLite/app/src/main/res/layout/activity_list_users.xml" value="0.3307291666666667" />
         <entry key="..\:/Users/Angelo/AndroidStudioProjects/SQLite/app/src/main/res/layout/activity_login.xml" value="0.67" />
+        <entry key="..\:/Users/Angelo/AndroidStudioProjects/SQLite/app/src/main/res/layout/card_users.xml" value="0.32447916666666665" />
+        <entry key="..\:/Users/Angelo/AndroidStudioProjects/SQLite/app/src/main/res/menu/menu.xml" value="0.5" />
+        <entry key="..\:/Users/Angelo/AppData/Local/Android/Sdk/platforms/android-32/data/res/layout/simple_list_item_1.xml" value="0.3307291666666667" />
       </map>
     </option>
   </component>

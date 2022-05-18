@@ -38,6 +38,8 @@
         android:autofillHints="username"
         android:hint="@string/txt_login_hint_user"
         android:inputType="text"
+        android:minHeight="48dp"
+        android:textColorHint="#757575"
         android:textSize="16sp" />
 
     <EditText
@@ -50,6 +52,8 @@
         android:autofillHints="password"
         android:hint="@string/txt_login_hint_password"
         android:inputType="textPassword"
+        android:minHeight="48dp"
+        android:textColorHint="#757575"
         android:textSize="16sp" />
 
     <Button
@@ -59,7 +63,8 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="10dp"
-        android:text="@string/txt_login_btn_login" />
+        android:text="@string/txt_login_btn_login"
+        tools:ignore="DuplicateSpeakableTextCheck" />
 
     <TextView
         android:id="@+id/login_txt_new_account"
