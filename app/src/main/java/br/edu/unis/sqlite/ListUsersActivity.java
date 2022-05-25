@@ -42,7 +42,7 @@ public class ListUsersActivity extends AppCompatActivity {
         @Override
         public ListUserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
-                .inflate(android.R.layout.simple_list_item_1, null, false);
+                .inflate(R.layout.item_user, parent, false);
             return new ListUserViewHolder(view);
         }
 
@@ -60,15 +60,18 @@ public class ListUsersActivity extends AppCompatActivity {
 
     private static class ListUserViewHolder extends RecyclerView.ViewHolder {
 
+        TextView txtUserId;
         TextView txtUser;
 
         public ListUserViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.txtUser = itemView.findViewById(android.R.id.text1);
+            this.txtUserId = itemView.findViewById(R.id.item_user_id);
+            this.txtUser = itemView.findViewById(R.id.item_user_user);
         }
 
         public void bind(User user) {
-            this.txtUser.setText("ID: "+ user.getId() + "| User: "+ user.getUser());
+            this.txtUserId.setText(Long.toString(user.getId()));
+            this.txtUser.setText(user.getUser());
         }
     }
 }

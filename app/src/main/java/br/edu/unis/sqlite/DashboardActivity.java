@@ -6,9 +6,12 @@ import android.os.Bundle;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
 public class DashboardActivity extends AppCompatActivity {
@@ -17,6 +20,14 @@ public class DashboardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+        loadWidgets();
+    }
+
+    public void loadWidgets() {
+        FloatingActionButton fab = findViewById(R.id.dashboard_fab_new_user);
+        fab.setOnClickListener(view -> {
+            startActivity(new Intent(DashboardActivity.this, CreateUserActivity.class));
+        });
     }
 
     @Override
