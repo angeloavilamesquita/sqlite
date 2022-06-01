@@ -57,6 +57,25 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         return id;
     }
 
+    public long updateUser(long id, String user, String password) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        try {
+            db.beginTransaction();
+            ContentValues values = new ContentValues();
+            values.put("user", user);
+            values.put("password", password);
+            String where = "id=" + id;
+            id = db.update(DB_TABLE, values, where, null);
+            db.setTransactionSuccessful();
+            Log.i("USER_UPDATED","ID: " + id);
+        } catch (SQLException e) {
+            Log.e("ERROR_UPDATE_USER", "updateUser: " + e.getMessage(), e);
+        } finally {
+            if (db.isOpen()) db.endTransaction();
+        }
+        return id;
+    }
+
     public boolean authenticateUser(String user, String password) {
         SQLiteDatabase db = this.getReadableDatabase();
         String[] columns = { "user" };

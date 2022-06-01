@@ -14,8 +14,8 @@
     <string name="txt_create_user_subtitle">Tela de cadastro de novos usuários do aplicativo</string>
     <string name="txt_create_user_btn_save">Salvar</string>
     <string name="txt_create_user_password_not_the_same">As senhas devem ser idênticas</string>
-    <string name="txt_create_user_created_successful">Usuário criado com sucesso</string>
-    <string name="txt_create_user_not_created">Erro ao criar usuário</string>
+    <string name="txt_create_user_created_successful">Usuário salvo com sucesso</string>
+    <string name="txt_create_user_not_created">Erro ao salvar usuário</string>
 
     <string name="txt_dashboard_menu_logout">Sair</string>
     <string name="txt_dashboard_list_users">Listar usuários</string>
